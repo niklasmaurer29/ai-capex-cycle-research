@@ -75,3 +75,5 @@ The first source-backed numbers and their comparability caveats are in
 The reproducible earnings-event methodology and results are in
 [`research/05_earnings_event_method.md`](research/05_earnings_event_method.md)
 and [`research/06_earnings_event_screen.md`](research/06_earnings_event_screen.md).
+The management-guidance bridge and expectations framework are in
+[`research/07_expectations_framework.md`](research/07_expectations_framework.md).
