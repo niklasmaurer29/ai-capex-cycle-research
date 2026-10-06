@@ -391,6 +391,112 @@ def guidance_bridge() -> None:
     )
 
 
+def next_earnings_monitor() -> None:
+    guidance = load_csv("nvidia_revenue_guidance_bridge.csv").copy()
+    pending = guidance[guidance["actual_revenue_usd_bn"].isna()].iloc[0]
+    midpoint = float(pending["guidance_midpoint_usd_bn"])
+    tolerance = float(pending["guidance_tolerance_pct"]) / 100
+    low_end = midpoint * (1 - tolerance)
+    high_end = midpoint * (1 + tolerance)
+
+    title_block(
+        "Next earnings monitor",
+        "A scenario framework for the next reported revenue figure. It is not a forecast and cannot predict the share-price reaction.",
+    )
+    first, second, third = st.columns(3)
+    first.metric("FY2027 Q3 guidance midpoint", f"USD {midpoint:.1f}bn")
+    second.metric("Company guidance range", f"USD {low_end:.2f}bn–{high_end:.2f}bn")
+    third.metric("China Data Center compute", "Not assumed", "In the published outlook")
+
+    illustrative_revenue = st.slider(
+        "Illustrative reported revenue (USD bn)",
+        min_value=round(low_end - 10, 1),
+        max_value=round(high_end + 10, 1),
+        value=midpoint,
+        step=0.1,
+        help="Move the scenario only to see how a reported revenue number would compare with NVIDIA's own published range.",
+    )
+    difference_to_midpoint = illustrative_revenue - midpoint
+    if illustrative_revenue < low_end:
+        result_label = "Below NVIDIA's published range"
+        result_colour = "#DC2626"
+        st.error(
+            "Illustrative outcome: below the company range. The next question would be whether demand, supply, "
+            "product timing or a geographic assumption changed."
+        )
+    elif illustrative_revenue <= high_end:
+        result_label = "Within NVIDIA's published range"
+        result_colour = "#D97706"
+        st.warning(
+            "Illustrative outcome: within the company range. The market would still focus on the next guide, "
+            "gross-margin outlook and management commentary."
+        )
+    else:
+        result_label = "Above NVIDIA's published range"
+        result_colour = "#2E9B52"
+        st.success(
+            "Illustrative outcome: above the company range. That is an execution observation only; it does not "
+            "establish a consensus beat or imply a positive stock reaction."
+        )
+
+    scenario_data = pd.DataFrame(
+        {
+            "reference": ["Low end", "Midpoint", "High end", "Illustrative reported revenue"],
+            "revenue_usd_bn": [low_end, midpoint, high_end, illustrative_revenue],
+            "category": ["Guidance", "Guidance", "Guidance", result_label],
+        }
+    )
+    st.vega_lite_chart(
+        scenario_data,
+        {
+            "title": {"text": "Illustrative revenue outcome versus own guidance", "anchor": "start", "fontSize": 16},
+            "mark": {"type": "bar", "cornerRadiusTopRight": 4, "cornerRadiusTopLeft": 4},
+            "encoding": {
+                "x": {"field": "reference", "type": "nominal", "sort": None, "title": None},
+                "y": {"field": "revenue_usd_bn", "type": "quantitative", "title": "USD bn"},
+                "color": {
+                    "field": "reference",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": ["Low end", "Midpoint", "High end", "Illustrative reported revenue"],
+                        "range": ["#9CA3AF", "#6B7280", "#374151", result_colour],
+                    },
+                    "legend": None,
+                },
+                "tooltip": [
+                    {"field": "reference", "type": "nominal", "title": "Reference"},
+                    {"field": "revenue_usd_bn", "type": "quantitative", "title": "Revenue", "format": ".2f"},
+                ],
+            },
+            "height": 300,
+        },
+        width="stretch",
+    )
+    st.caption(
+        f"Illustrative revenue is USD {difference_to_midpoint:+.1f}bn versus the guidance midpoint. "
+        "The range is management guidance, not analyst consensus."
+    )
+
+    questions, limitations = st.columns(2)
+    with questions:
+        st.subheader("What to monitor with the result")
+        st.markdown(
+            "- Next-quarter revenue guide and any change in its range\n"
+            "- Data Center demand, customer breadth and product-transition commentary\n"
+            "- Gross-margin outlook alongside revenue growth\n"
+            "- Continued assumption of no China Data Center compute revenue\n"
+            "- Evidence that hyperscaler investment remains supported by cash generation"
+        )
+    with limitations:
+        st.subheader("What the monitor cannot say")
+        st.markdown(
+            "- It does not estimate analyst consensus or a consensus beat/miss.\n"
+            "- It does not estimate valuation or a price target.\n"
+            "- It does not translate a guidance outcome into a predicted stock move.\n"
+            "- It is a repeatable pre-earnings checklist, not investment advice."
+        )
+
+
 def market_memo() -> None:
     title_block(
         "Market memo",
@@ -553,6 +659,7 @@ def main() -> None:
                 "Investment cycle",
                 "Earnings reactions",
                 "Guidance bridge",
+                "Next earnings monitor",
                 "Value creation loop",
                 "Market memo",
             ],
@@ -568,6 +675,8 @@ def main() -> None:
         earnings_reactions()
     elif page == "Guidance bridge":
         guidance_bridge()
+    elif page == "Next earnings monitor":
+        next_earnings_monitor()
     elif page == "Value creation loop":
         value_creation_loop()
     else:

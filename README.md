@@ -81,6 +81,8 @@ The completed short-form Markets memo is in
 [`research/08_market_memo.md`](research/08_market_memo.md).
 The conceptual value-creation framework is in
 [`research/09_value_creation_framework.md`](research/09_value_creation_framework.md).
+The pre-earnings scenario checklist is in
+[`research/10_next_earnings_monitor.md`](research/10_next_earnings_monitor.md).
 
 ## Run the dashboard locally
 
