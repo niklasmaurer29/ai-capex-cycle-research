@@ -653,6 +653,7 @@ def main() -> None:
     with st.sidebar:
         st.header("AI Capex Cycle")
         st.caption("NVIDIA, hyperscalers and market expectations")
+        st.info("Start here: Investment cycle → Market memo → Next earnings monitor")
         page = st.radio(
             "Navigate",
             [

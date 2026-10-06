@@ -4,6 +4,12 @@ A source-backed markets research case study on the relationship between
 hyperscaler investment, NVIDIA's data-centre economics and the market's
 valuation expectations.
 
+## Dashboard preview
+
+![Investment-cycle dashboard: hyperscaler raw property-and-equipment purchases and NVIDIA Data Center revenue](assets/ai-capex-investment-cycle.png)
+
+![Conceptual value-creation loop: capital, compute, end demand and circularity risk](assets/ai-capex-value-creation-loop.png)
+
 ## Research question
 
 > Are the reported AI-infrastructure investments of Microsoft, Alphabet,
@@ -58,6 +64,19 @@ The finished case study will include:
    valuation metrics.
 4. Test the investment-cycle narrative against earnings, cash flow and risks.
 5. Present the findings in a market note and dashboard.
+
+## How to discuss this in an interview
+
+> “I separated company execution from market expectations. I compared
+> NVIDIA's reported revenue with its own prior guidance and mapped the
+> next-day share-price reaction relative to QQQ. Three reported quarters
+> exceeded management's revenue range, but two still underperformed QQQ
+> immediately afterwards. The project therefore focuses on the next guide,
+> China assumptions, margins and hyperscaler funding capacity—not on a single
+> growth headline.”
+
+For the full framework, including its limitations, see
+[`research/07_expectations_framework.md`](research/07_expectations_framework.md).
 
 ## Repository structure
 
