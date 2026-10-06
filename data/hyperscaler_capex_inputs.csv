@@ -1,0 +1,5 @@
+company,fiscal_period_end,operating_cash_flow_current_usd_m,raw_ppe_purchases_current_usd_m,operating_cash_flow_prior_usd_m,raw_ppe_purchases_prior_usd_m,reported_measure,comparability_note
+Microsoft,2025-06-30,136162,64551,118548,44477,Additions to property and equipment,Fiscal year ends on 30 June; additions include facilities data centres and computer systems and are not issuer-labelled AI capex.
+Alphabet,2025-12-31,164713,91447,125299,52535,Purchases of property and equipment,The issuer separately describes capital expenditures as primarily technical infrastructure and office facilities; do not treat the full amount as AI-only spend.
+Amazon,2025-12-31,139514,131819,115877,82999,Purchases of property and equipment,The raw cash-flow line is used for cross-company screening; Amazon's own free-cash-flow measure nets property-sale proceeds and incentives.
+Meta,2025-12-31,115800,69691,91328,37256,Purchases of property and equipment,The raw cash-flow line excludes principal payments on finance leases; Meta reports a broader capital-expenditure amount that includes both.
