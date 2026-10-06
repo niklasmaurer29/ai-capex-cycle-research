@@ -1,0 +1,13 @@
+event_id,horizon,trading_date,nvda_close_usd,qqq_close_usd,price_source,source_download_date
+FY2026_Q3,event_date,2025-11-19,186.52,599.87,Nasdaq Historical Quotes Close/Last,2026-10-06
+FY2026_Q3,one_trading_day,2025-11-20,180.64,585.67,Nasdaq Historical Quotes Close/Last,2026-10-06
+FY2026_Q3,five_trading_days,2025-11-26,180.26,614.27,Nasdaq Historical Quotes Close/Last,2026-10-06
+FY2026_Q4,event_date,2026-02-25,195.56,616.68,Nasdaq Historical Quotes Close/Last,2026-10-06
+FY2026_Q4,one_trading_day,2026-02-26,184.89,609.24,Nasdaq Historical Quotes Close/Last,2026-10-06
+FY2026_Q4,five_trading_days,2026-03-04,183.04,610.75,Nasdaq Historical Quotes Close/Last,2026-10-06
+FY2027_Q1,event_date,2026-05-20,223.47,713.15,Nasdaq Historical Quotes Close/Last,2026-10-06
+FY2027_Q1,one_trading_day,2026-05-21,219.51,714.51,Nasdaq Historical Quotes Close/Last,2026-10-06
+FY2027_Q1,five_trading_days,2026-05-28,214.25,735.60,Nasdaq Historical Quotes Close/Last,2026-10-06
+FY2027_Q2,event_date,2026-08-26,209.66,711.37,Nasdaq Historical Quotes Close/Last,2026-10-06
+FY2027_Q2,one_trading_day,2026-08-27,227.98,721.11,Nasdaq Historical Quotes Close/Last,2026-10-06
+FY2027_Q2,five_trading_days,2026-09-02,224.41,709.24,Nasdaq Historical Quotes Close/Last,2026-10-06

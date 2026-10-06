@@ -72,3 +72,6 @@ source_documents/  Local annual reports; PDFs are intentionally not committed
 Start with [`research/01_project_brief.md`](research/01_project_brief.md).
 The first source-backed numbers and their comparability caveats are in
 [`research/04_initial_fact_base.md`](research/04_initial_fact_base.md).
+The reproducible earnings-event methodology and results are in
+[`research/05_earnings_event_method.md`](research/05_earnings_event_method.md)
+and [`research/06_earnings_event_screen.md`](research/06_earnings_event_screen.md).
