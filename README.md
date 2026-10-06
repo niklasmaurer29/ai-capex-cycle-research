@@ -77,3 +77,5 @@ The reproducible earnings-event methodology and results are in
 and [`research/06_earnings_event_screen.md`](research/06_earnings_event_screen.md).
 The management-guidance bridge and expectations framework are in
 [`research/07_expectations_framework.md`](research/07_expectations_framework.md).
+The completed short-form Markets memo is in
+[`research/08_market_memo.md`](research/08_market_memo.md).
