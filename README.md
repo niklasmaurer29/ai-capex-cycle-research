@@ -79,3 +79,14 @@ The management-guidance bridge and expectations framework are in
 [`research/07_expectations_framework.md`](research/07_expectations_framework.md).
 The completed short-form Markets memo is in
 [`research/08_market_memo.md`](research/08_market_memo.md).
+
+## Run the dashboard locally
+
+From the project folder, run:
+
+```bash
+python3 -m streamlit run src/app.py
+```
+
+The dashboard reads only the versioned CSV files in `data/`. It does not
+download live market data and does not make an investment recommendation.
