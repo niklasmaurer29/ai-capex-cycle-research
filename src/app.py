@@ -10,6 +10,7 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -17,8 +18,8 @@ DATA_DIR = PROJECT_ROOT / "data"
 RESEARCH_DIR = PROJECT_ROOT / "research"
 
 COMPANY_COLORS = {
-    "Microsoft": "#00A4EF",
-    "Alphabet": "#4285F4",
+    "Microsoft": "#7FBA00",
+    "Alphabet": "#F94345",
     "Amazon": "#FF9900",
     "Meta": "#0081FB",
 }
@@ -53,7 +54,8 @@ def bar_chart(
     title: str,
     tooltip: list[dict[str, str]],
 ) -> None:
-    colors = [COMPANY_COLORS[company] for company in frame["company"]]
+    companies = frame["company"].tolist()
+    colors = [COMPANY_COLORS[company] for company in companies]
     st.vega_lite_chart(
         frame,
         {
@@ -65,7 +67,7 @@ def bar_chart(
                 "color": {
                     "field": "company",
                     "type": "nominal",
-                    "scale": {"range": colors},
+                    "scale": {"domain": companies, "range": colors},
                     "legend": None,
                 },
                 "tooltip": tooltip,
@@ -411,6 +413,125 @@ def market_memo() -> None:
         st.markdown(load_text("08_market_memo.md"))
 
 
+def value_creation_loop() -> None:
+    title_block(
+        "Capital circulation versus value creation",
+        "A conceptual framework for testing whether AI infrastructure spend becomes durable end-customer cash flow.",
+    )
+    components.html(
+        """
+        <style>
+          body { margin: 0; background: transparent; font-family: Inter, Arial, sans-serif; color: #172033; }
+          .cycle-wrap { max-width: 1160px; margin: 0 auto; }
+          svg { display: block; width: 100%; height: auto; }
+          .node { stroke-width: 2; }
+          .title { font-size: 17px; font-weight: 700; fill: #172033; text-anchor: middle; }
+          .body { font-size: 12px; fill: #4B5563; text-anchor: middle; }
+          .arrow-label { font-size: 12px; font-weight: 600; paint-order: stroke; stroke: #FFFFFF; stroke-width: 4px; stroke-linejoin: round; }
+          .legend { font-size: 12px; fill: #4B5563; }
+          .test-title { font-size: 15px; font-weight: 700; fill: #8A4B00; text-anchor: middle; }
+          .test-body { font-size: 11px; fill: #8A4B00; text-anchor: middle; }
+        </style>
+        <div class="cycle-wrap" role="img" aria-label="Conceptual AI capital cycle showing money, compute, end demand and circularity risk">
+          <svg viewBox="0 0 1160 650" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <marker id="arrow-pink" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#E83E8C" /></marker>
+              <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#377DFF" /></marker>
+              <marker id="arrow-cyan" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#15B8B5" /></marker>
+              <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2E9B52" /></marker>
+              <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#D97706" /></marker>
+            </defs>
+
+            <text x="28" y="32" style="font-size: 20px; font-weight: 750; fill: #172033;">How the AI capital cycle creates — or fails to create — value</text>
+            <text x="28" y="55" style="font-size: 12px; fill: #6B7280;">Conceptual map: colour shows the type of flow, not a specific contractual relationship.</text>
+
+            <path d="M282 142 C440 55, 720 52, 875 145" fill="none" stroke="#E83E8C" stroke-width="3" marker-end="url(#arrow-pink)" />
+            <text x="555" y="85" class="arrow-label" fill="#D72773">funding, equity and operating cash flow</text>
+
+            <path d="M862 194 C772 215, 695 247, 657 285" fill="none" stroke="#E83E8C" stroke-width="3" marker-end="url(#arrow-pink)" />
+            <text x="746" y="250" class="arrow-label" fill="#D72773">AI infrastructure orders</text>
+
+            <path d="M650 307 C750 300, 830 328, 880 382" fill="none" stroke="#377DFF" stroke-width="3" marker-end="url(#arrow-blue)" />
+            <text x="778" y="319" class="arrow-label" fill="#2563EB">systems and compute</text>
+
+            <path d="M898 460 C820 508, 724 540, 676 549" fill="none" stroke="#15B8B5" stroke-width="3" marker-end="url(#arrow-cyan)" />
+            <text x="791" y="523" class="arrow-label" fill="#0B8F8C">AI services and applications</text>
+
+            <path d="M570 536 C570 526, 570 517, 570 511" fill="none" stroke="#2E9B52" stroke-width="4" marker-end="url(#arrow-green)" />
+            <path d="M492 454 C423 454, 352 454, 305 454" fill="none" stroke="#2E9B52" stroke-width="4" marker-end="url(#arrow-green)" />
+
+            <path d="M170 413 C84 328, 75 226, 130 173" fill="none" stroke="#2E9B52" stroke-width="3" marker-end="url(#arrow-green)" />
+            <text x="52" y="300" class="arrow-label" fill="#237A40">cash returns</text>
+
+            <path d="M982 374 C1018 313, 1003 258, 958 221" fill="none" stroke="#D97706" stroke-width="3" stroke-dasharray="9 8" marker-end="url(#arrow-orange)" />
+            <text x="1036" y="285" class="arrow-label" fill="#B45309">circularity risk</text>
+            <text x="1036" y="302" class="arrow-label" fill="#B45309">unproven monetisation</text>
+
+            <rect class="node" x="58" y="104" width="230" height="92" rx="20" fill="#EEF2F7" stroke="#9CA3AF" />
+            <text x="173" y="140" class="title">Capital providers</text>
+            <text x="173" y="162" class="body">equity, debt and operating cash flow</text>
+
+            <rect class="node" x="866" y="112" width="244" height="108" rx="20" fill="#E5F0FF" stroke="#377DFF" />
+            <text x="988" y="148" class="title">Hyperscalers</text>
+            <text x="988" y="171" class="body">Microsoft · Alphabet · Amazon · Meta</text>
+            <text x="988" y="191" class="body">AI infrastructure budgets</text>
+
+            <circle class="node" cx="570" cy="310" r="92" fill="#E8F6D9" stroke="#76B900" stroke-width="3" />
+            <text x="570" y="290" class="title">NVIDIA and the</text>
+            <text x="570" y="312" class="title">compute supply chain</text>
+            <text x="570" y="338" class="body">systems, components and networking</text>
+
+            <rect class="node" x="870" y="374" width="240" height="106" rx="20" fill="#E8F8F8" stroke="#15B8B5" />
+            <text x="990" y="410" class="title">AI capacity and products</text>
+            <text x="990" y="433" class="body">cloud compute, models and applications</text>
+            <text x="990" y="454" class="body">model builders and developers</text>
+
+            <rect class="node" x="473" y="536" width="250" height="90" rx="20" fill="#FFF2D9" stroke="#FF9900" />
+            <text x="598" y="570" class="title">Enterprise and consumer users</text>
+            <text x="598" y="594" class="body">willingness to pay and realised benefits</text>
+
+            <rect class="node" x="55" y="398" width="250" height="105" rx="20" fill="#E7F7EC" stroke="#2E9B52" />
+            <text x="180" y="434" class="title">Revenue and free cash flow</text>
+            <text x="180" y="457" class="body">cash returns from monetised end demand</text>
+            <text x="180" y="478" class="body">can fund the next investment cycle</text>
+
+            <polygon points="570,399 648,454 570,509 492,454" fill="#FFF7D6" stroke="#D97706" stroke-width="2" />
+            <text x="570" y="443" class="test-title">Value-creation test</text>
+            <text x="570" y="462" class="test-body">Do customer payments and measurable</text>
+            <text x="570" y="478" class="test-body">benefits exceed the cost of compute?</text>
+
+            <line x1="58" y1="635" x2="84" y2="635" stroke="#E83E8C" stroke-width="3" /><text x="92" y="639" class="legend">capital and payments</text>
+            <line x1="254" y1="635" x2="280" y2="635" stroke="#377DFF" stroke-width="3" /><text x="288" y="639" class="legend">compute and infrastructure</text>
+            <line x1="492" y1="635" x2="518" y2="635" stroke="#2E9B52" stroke-width="3" /><text x="526" y="639" class="legend">monetised end demand</text>
+            <line x1="735" y1="635" x2="761" y2="635" stroke="#D97706" stroke-width="3" stroke-dasharray="7 5" /><text x="769" y="639" class="legend">unproven circularity</text>
+          </svg>
+        </div>
+        """,
+        height=650,
+        scrolling=False,
+    )
+    st.caption(
+        "Conceptual framework, not a cash-flow statement and not an allegation about any specific company relationship."
+    )
+    validated, unvalidated = st.columns(2)
+    with validated:
+        st.subheader("What validates value creation?")
+        st.write(
+            "End customers pay for AI-enabled products or realise measurable productivity gains; "
+            "those benefits become recurring revenue and cash flow that can fund the next investment cycle."
+        )
+    with unvalidated:
+        st.subheader("What makes the loop fragile?")
+        st.write(
+            "Capacity spending can remain high while monetisation is uncertain. In that case, "
+            "the observed cycle may be driven more by financing and ecosystem commitments than by durable end demand."
+        )
+    st.info(
+        "This is why the project follows more than NVIDIA revenue: it also monitors hyperscaler funding capacity, "
+        "forward guidance, margins and the evidence of demand beyond the infrastructure build-out."
+    )
+
+
 def main() -> None:
     st.set_page_config(page_title="AI Capex Cycle Research", page_icon="📈", layout="wide")
     st.markdown(
@@ -428,7 +549,13 @@ def main() -> None:
         st.caption("NVIDIA, hyperscalers and market expectations")
         page = st.radio(
             "Navigate",
-            ["Investment cycle", "Earnings reactions", "Guidance bridge", "Market memo"],
+            [
+                "Investment cycle",
+                "Earnings reactions",
+                "Guidance bridge",
+                "Value creation loop",
+                "Market memo",
+            ],
             label_visibility="collapsed",
         )
         st.divider()
@@ -441,6 +568,8 @@ def main() -> None:
         earnings_reactions()
     elif page == "Guidance bridge":
         guidance_bridge()
+    elif page == "Value creation loop":
+        value_creation_loop()
     else:
         market_memo()
 

@@ -79,6 +79,8 @@ The management-guidance bridge and expectations framework are in
 [`research/07_expectations_framework.md`](research/07_expectations_framework.md).
 The completed short-form Markets memo is in
 [`research/08_market_memo.md`](research/08_market_memo.md).
+The conceptual value-creation framework is in
+[`research/09_value_creation_framework.md`](research/09_value_creation_framework.md).
 
 ## Run the dashboard locally
 
